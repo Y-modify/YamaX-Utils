@@ -67,7 +67,7 @@
 /**
  * Open JTalkでTTSするクラス
  */
-namespace voice{
+namespace yamax{
 	class tts
 	{
 	public:
@@ -76,15 +76,12 @@ namespace voice{
 		 * @param[in] voice_dir	音素などが入ったディレクトリ
 		 * @param[in] dic_dir	辞書入ったディレクトリ
 		 */
-		tts();
 		tts(const std::string& voice_dir, const std::string& dic_dir);
 
 		/**
 		 * デストラクタ
 		 */
 		~tts();
-
-		void dload(const std::string& voice_dir, const std::string& dic_dir);
 
 		/**
 		 * 喋らせる
@@ -112,7 +109,7 @@ namespace voice{
 		void initialize(Open_JTalk * open_jtalk);
 
 		//! 必要なファイル群をロードする(open_jtalk.c より抜粋)
-		bool load(Open_JTalk * open_jtalk, char *dn_mecab, char *fn_voice);
+		bool dload(Open_JTalk * open_jtalk, char *dn_mecab, char *fn_voice);
 
 		//! 指定したテキストを喋る wav ファイルを作成する
 		bool synthesis(const char *txt, FILE * wavfp);

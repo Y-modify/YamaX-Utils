@@ -43,26 +43,29 @@
 
 #include "dfbimage.hpp"
 
-class Face{
-public:
-     Face(std::string facesdir, std::string fontp);
+namespace yamax
+{
+  class Face{
+  public:
+       Face(std::string facesdir, std::string fontp);
 
-     ~Face();
+       ~Face();
 
-     void setFace(std::string face);
-     void setMessage(std::string msg);
+       void setFace(std::string face);
+       void setMessage(std::string msg);
 
-     void Render();
+       void Render();
 
-private:
-     std::string _facesdir;
-     std::string _face;
-     std::string _message;
-     DFBImage    _image;
-     int                  _width;
-     int                  _height;
-     bool                 _flipping;
-     IDirectFB            _dfb;
-     IDirectFBFont        _font;
-     IDirectFBSurface     _primary;
-};
+  private:
+       std::string _facesdir;
+       std::string _face;
+       std::string _message;
+       DFBImage    _image;
+       int                  _width;
+       int                  _height;
+       bool                 _flipping;
+       IDirectFB            _dfb;
+       IDirectFBFont        _font;
+       IDirectFBSurface     _primary;
+  };
+}

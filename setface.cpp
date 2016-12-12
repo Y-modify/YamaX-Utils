@@ -3,6 +3,8 @@
 #include <thread>
 #include <unistd.h>
 
+using namespace yamax;
+
 Face face("/usr/share/faces", "/home/root/.fonts/Kazesawa-Regular.ttf");
 
 int main( int argc, char *argv[] )

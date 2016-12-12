@@ -6,10 +6,10 @@
 *************************************/
 
 #include <iostream>
-#include "physicalio/physicalio.hpp"
+#include "posture/physicalio/physicalio.hpp"
 #include <unistd.h>
 
-using namespace pio;
+using namespace yamax;
 
 /*****Pulse Adjust*****/
 #define SERVOMIN  0.5  //when 0° (ms)
@@ -118,30 +118,8 @@ extern void dosuru(int t);
 /*****Initialize Servo Driver*****/
 int main(void){
   ss.setPWMFreq(50);
-  //kusoran();
-  while(1) {
-    stand();
-    usleep(1000*1000);
-    walk(20, 200);
-    usleep(1000*1000);
-    /*stand();
-    usleep(1000*1000);
-    turnright(10, 200);
-    usleep(1000*1000);
-    stand();
-    usleep(1000*1000);
-    turnleft(10, 200);
-    usleep(1000*1000);
-    stand();
-    usleep(1000*1000);
-    nadenade(1, 5);
-    nadenade(0, 5);
-    bye(1, 5);
-    bye(0, 5);
-    bye(2, 5);
-    stand();
-    while(1);*/
-  }
+  kusoran();
+  while(1);
   return 0;
 }
 

@@ -6,7 +6,7 @@
 #include <memory>
 #include "physicalio.hpp"
 
-using namespace pio;
+using namespace yamax;
 
 const uint8_t servos::MODE1 = 0x00;
 const uint8_t servos::PRESCALE = 0xFE;
@@ -33,10 +33,10 @@ float servo::getDegrees(void){
 }
 
 servos::servos(uint8_t bus, uint16_t num, uint8_t baseadd){
+  _pwmfreq = 50;
+  setPWMFreq(_pwmfreq);
   if (!(_i2cc = new mraa::I2c(bus)))
     throw "I2C initialization failed";
-
-  //std::cout << ceil((double)(num-1)/16) << " board (init)" << std::endl;
 
   for(int i=0; i<ceil((double)(num-1)/16); i++)
     _boards.push_back(baseadd+i);
@@ -46,11 +46,13 @@ servos::servos(uint8_t bus, uint16_t num, uint8_t baseadd){
     _i2cc->writeReg(MODE1, 0);
   }
   for(int i=0; i<num; i++)
-    _servos.push_back(servo(i, this));
+    _servos.push_back(std::unique_ptr<servo>(new servo(i, this)));
   _number = num;
 }
 
 servos::servos(uint8_t bus, uint16_t num, uint8_t baseadd, float smin, float smax){
+  _pwmfreq = 50;
+  setPWMFreq(_pwmfreq);
   if (!(_i2cc = new mraa::I2c(bus)))
     throw "I2C initialization failed";
 
@@ -61,8 +63,12 @@ servos::servos(uint8_t bus, uint16_t num, uint8_t baseadd, float smin, float sma
     _i2cc->address(board);
     _i2cc->writeReg(MODE1, 0);
   }
-  for(int i=0; i<num; i++)
-    _servos.push_back(servo(i, this));
+  for(int i=0; i<num; i++){
+    servo* s = new servo(i, this);
+    s->minPulseWidth = smin;
+    s->maxPulseWidth = smax;
+    _servos.push_back(std::unique_ptr<servo>(s));
+  }
   _number = num;
 }
 
@@ -85,10 +91,10 @@ uint8_t servos::setServoPulse(uint8_t n, float smin, float smax, float degrees) 
     degrees = 180;
   if(degrees < 0)
     degrees = 0;
-  //std::cout << "set " << (int)n << " to " << degrees << " deg" << std::endl;
   //same as map(degress, 0, 180, SERVOMINP, SERVOMAXP);
   double pulse = 0.5 + ((smax - smin) / 180) * degrees;
   //same as roundf(map(pulse/(1000/PWMFREQ), 0.0, 1.0, 0.0, 4095.0));
+  //std::cout << "requested board " << floor(n/16) << " among " << _boards.size() << std::endl;
   uint16_t d = roundf(4095.0 * (pulse/(1000/_pwmfreq)));
   _i2cc->address(_boards[floor(n/16)]);
   _i2cc->writeWordReg(LED0+4*(n%16)+2, d);
@@ -100,5 +106,5 @@ uint16_t servos::getNumber(void){
 }
 
 servo servos::operator[](uint16_t num){
-  return _servos[num];
+  return *_servos[num].get();
 }

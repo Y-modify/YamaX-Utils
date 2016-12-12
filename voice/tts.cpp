@@ -51,13 +51,7 @@
 
 #define MAXBUFLEN 1024
 
-using namespace voice;
-
-tts::tts()
-	: wav_filename_(".__tmp__.wav")
-{
-  initialize(&open_jtalk);
-}
+using namespace yamax;
 
 tts::tts(const std::string& voice_dir, const std::string& dic_dir)
 	: wav_filename_(".__tmp__.wav")
@@ -66,18 +60,10 @@ tts::tts(const std::string& voice_dir, const std::string& dic_dir)
   initialize(&open_jtalk);
 
   /* load dictionary and HTS voice */
-  if (load(&open_jtalk, (char*)(dic_dir.c_str()), (char*)(voice_dir.c_str())) != TRUE) {
+  if (dload(&open_jtalk, (char*)(dic_dir.c_str()), (char*)(voice_dir.c_str())) != TRUE) {
      fprintf(stderr, "Error: Dictionary or HTS voice cannot be loaded.\n");
      exit(1);
   }
-}
-
-void tts::dload(const std::string& voice_dir, const std::string& dic_dir)
-{
-	if (load(&open_jtalk, (char*)(dic_dir.c_str()), (char*)(voice_dir.c_str())) != TRUE) {
-		 fprintf(stderr, "Error: Dictionary or HTS voice cannot be loaded.\n");
-		 exit(1);
-	}
 }
 
 tts::~tts()
@@ -96,7 +82,7 @@ void tts::initialize(Open_JTalk * open_jtalk_)
   HTS_Engine_initialize(&open_jtalk_->engine);
 }
 
-bool tts::load(Open_JTalk * open_jtalk_, char *dn_mecab, char *fn_voice)
+bool tts::dload(Open_JTalk * open_jtalk_, char *dn_mecab, char *fn_voice)
 {
   if (Mecab_load(&open_jtalk_->mecab, dn_mecab) != TRUE) {
      return false;

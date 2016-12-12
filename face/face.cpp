@@ -35,6 +35,8 @@
 */
 #include "face.hpp"
 
+using namespace yamax;
+
 Face::Face(std::string facesdir, std::string fontp) {
   _facesdir = facesdir;
 

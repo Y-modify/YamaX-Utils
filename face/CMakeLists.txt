@@ -7,10 +7,13 @@ include_directories(/usr/include/directfb
 add_library(dfbimage STATIC
   dfbimage.cpp
 )
-add_library(face STATIC
+add_library(face SHARED
   face.cpp
 )
 
 target_link_libraries(dfbimage directfb ++dfb)
 
 target_link_libraries(face dfbimage directfb ++dfb)
+
+INSTALL(TARGETS face LIBRARY DESTINATION lib)
+INSTALL(FILES face.hpp DESTINATION include/yamax)

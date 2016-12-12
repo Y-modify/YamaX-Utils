@@ -13,7 +13,7 @@ int main(void){
   string tcontext;
 
   while(1){
-    std::cout << "> ";
+    std::cerr << "> ";
     std::cin >> usersay;
     sreq::request req("https://api.apigw.smt.docomo.ne.jp/dialogue/v1/dialogue?APIKEY="+APIKey,
                       "{\"utt\":\""+usersay+"\", \"context\":\""+tcontext+"\"}",

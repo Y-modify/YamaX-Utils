@@ -1,8 +1,8 @@
 #include <iostream>
-#include "physicalio/physicalio.hpp"
+#include "posture/physicalio/physicalio.hpp"
 #include <unistd.h>
 
-using namespace pio;
+using namespace yamax;
 
 int main(void)
 {

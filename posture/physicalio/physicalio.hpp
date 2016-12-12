@@ -5,7 +5,7 @@
 #include <memory>
 #include <mraa/i2c.hpp>
 
-namespace pio
+namespace yamax
 {
   class servos;
   class servo;
@@ -36,7 +36,7 @@ namespace pio
       servo operator[](uint16_t num);
   private:
       std::vector<uint8_t> _boards;
-      std::vector<servo> _servos;
+      std::vector<std::unique_ptr<servo>> _servos;
       mraa::I2c* _i2cc;
       uint16_t _number;
       float _pwmfreq;

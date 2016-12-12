@@ -1,9 +1,9 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "physicalio/physicalio.hpp"
+#include "posture/physicalio/physicalio.hpp"
 
-using namespace pio;
+using namespace yamax;
 
 int main(int argc, char *argv[])
 {
@@ -25,10 +25,7 @@ int main(int argc, char *argv[])
     std::string::size_type index = str.find("#");
     if (index != std::string::npos)
       str = str.substr(0, index);
-    servo s = ss[j];
-    s.minPulseWidth = 0.5;
-    s.maxPulseWidth = 2.5;
-    s.setDegrees(atoi(str.c_str()));
+    ss[j].setDegrees(atoi(str.c_str()));
     j++;
   }
   return 0;
