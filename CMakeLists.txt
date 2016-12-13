@@ -4,7 +4,7 @@ set(CMAKE_CXX_FLAGS_RELEASE "-Wall -O2")
 set(CMAKE_CXX_FLAGS_DEBUG "-g -Wno-unused-variable")
 
 set(CMAKE_VERBOSE_MAKEFILE 0)
-set(CMAKE_BUILD_TYPE Release)
+set(CMAKE_BUILD_TYPE Debug)
 
 add_subdirectory(posture)
 add_subdirectory(voice)
