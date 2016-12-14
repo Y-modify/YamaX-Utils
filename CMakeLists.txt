@@ -23,6 +23,8 @@ add_executable(setdeg setdeg.cpp)
 target_link_libraries(setdeg physicalio)
 add_executable(setform setform.cpp)
 target_link_libraries(setform posture)
+add_executable(setaction setaction.cpp)
+target_link_libraries(setaction posture)
 add_executable(docotalk docotalk.cpp)
 target_link_libraries(docotalk simplerequest)
 
@@ -33,7 +35,7 @@ target_link_libraries(vecho tts)
 add_executable(vcat vcat.cpp)
 target_link_libraries(vcat vrecog)
 
-INSTALL(TARGETS vecho vcat setface mkform setbaseform setdeg setform docotalk RUNTIME DESTINATION bin)
+INSTALL(TARGETS vecho vcat setface mkform setbaseform setdeg setform setaction docotalk RUNTIME DESTINATION bin)
 
 #[[
 add_executable(demo-servos demo-servos.cpp)

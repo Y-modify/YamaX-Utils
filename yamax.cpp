@@ -15,7 +15,7 @@ using namespace std;
 vrecog v;
 tts t("/usr/share/hts-voice/mei/mei_normal.htsvoice", "/usr/dic");
 Face face("/usr/share/faces", "/home/root/.fonts/Kazesawa-Regular.ttf");
-posture form("yamax32");
+posture form;
 
 uint8_t logLevel = 0;
 const string APIKey = "786e715269793131796d36695275467667384430317154457a71626e32646953584657566c6d4c4370732e";

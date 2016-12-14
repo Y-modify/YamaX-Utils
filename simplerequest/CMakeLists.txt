@@ -6,4 +6,4 @@ add_library(simplerequest SHARED
 target_link_libraries(simplerequest curlpp curl m)
 
 INSTALL(TARGETS simplerequest LIBRARY DESTINATION lib)
-INSTALL(FILES simplerequest.hpp DESTINATION include/yamax)
+INSTALL(FILES sreq.hpp DESTINATION include/yamax)

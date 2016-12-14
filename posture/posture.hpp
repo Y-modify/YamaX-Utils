@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <unistd.h>
 #include "picojson.h"
 #include "physicalio/physicalio.hpp"
 
@@ -11,8 +12,9 @@ namespace yamax
   class posture
   {
   public:
-      posture(const std::string& rname);
-      bool setPosture(const std::string post);
+      posture(const std::string& bpath = "/usr/share/yamax/");
+      void setPosture(std::string post);
+      void doAction(std::string act, uint16_t times, int delay = -1);
       void stand();
       uint16_t servonum;
       servos joints;
